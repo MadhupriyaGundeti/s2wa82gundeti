@@ -1,16 +1,31 @@
 var express = require('express');
-const { param } = require('./users');
 var router = express.Router();
-var s = Math.random().toFixed(2);
 
+/* GET computation page. */
+router.get('/', function (req, res, next) {
+  var a;
+  
+  var random = Math.random();
+  console.log(req.query.a);
+  b = req.query.a;
 
-console.log(s);
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  if (req.query.s != undefined) {
-    s = req.query.s;
+  // checking if url has params
+  if (a == undefined) {
+    a = random;
   }
-   
-  res.render('computation', { Calculate: 'atanh of ' +s+' is '+Math.atanh(s) });
+  
+  let atan2 = Math.atan2(a,a) 
+  //console.log(atan2); 
+  let atanh = Math.atanh(a) 
+  let cbrt = Math.cbrt(a)  
+ 
+  res.render('computation', {
+    title: 'Computation',
+    Calculate: `applied to ` + a  + ` is ` + atan2,
+    c1: `applied to ` + a + ` is ` + atanh,
+    c2: `applied to ` + a + ` is ` + cbrt,
+    
+  });
 });
+
 module.exports = router;
